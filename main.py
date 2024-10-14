@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for
 app = Flask(__name__)
 
 lista_usuarios = ['Sandro', 'Ray', 'Marcelo', 'Hide', 'Lidia']
@@ -14,6 +14,10 @@ def contato():
 @app.route('/usuarios')
 def usuarios():
     return render_template('usuarios.html', lista_usuarios = lista_usuarios)
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
