@@ -11,7 +11,7 @@ lista_usuarios = ['Sandro', 'Ray', 'Marcelo', 'Hide', 'Lidia']
 app.config['SECRET_KEY'] = '3247f73eee75b941aa3889f747042b69'
 
 #Configuração do SQL Alchemy
-app.config['SQLACHEMY_DATABASE_URI'] = 'sqlite///comunidade.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///comunidade.db'
 database = SQLAlchemy(app)
 
 @app.route('/')
