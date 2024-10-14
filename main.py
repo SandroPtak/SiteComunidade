@@ -1,12 +1,18 @@
 from flask import Flask, render_template, url_for, request, flash, redirect
 from forms import FormCriarConta, FormLogin
 
+#importação do SQL Alchemy
+from flask_sqlalchemy import SQLAlchemy
+
 app = Flask(__name__)
 
 lista_usuarios = ['Sandro', 'Ray', 'Marcelo', 'Hide', 'Lidia']
 
 app.config['SECRET_KEY'] = '3247f73eee75b941aa3889f747042b69'
 
+#Configuração do SQL Alchemy
+app.config['SQLACHEMY_DATABASE_URI'] = 'sqlite///comunidade.db'
+database = SQLAlchemy(app)
 
 @app.route('/')
 def home():
