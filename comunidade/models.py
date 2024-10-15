@@ -1,4 +1,4 @@
-from main import database
+from comunidade import database
 from datetime import datetime
 
 #Criação do modelo das tabelas do banco de dados
@@ -11,6 +11,7 @@ class Usuario(database.Model):
     senha = database.Column(database.String, nullable=False)
     foto_perfil = database.Column(database.String, default='default.jpg', nullable=False)
     posts = database.relationship('Post', backref='autor', lazy=True)
+    comentarios = database.relationship('Comentario', backref='autor_comentario', lazy=True)
 
 
 class Post(database.Model):
@@ -21,3 +22,12 @@ class Post(database.Model):
     corpo = database.Column(database.Text, nullable=False)
     data_criacao = database.Column(database.DateTime, nullable=False, default=datetime.utcnow)
     id_usuario = database.Column(database.Integer, database.ForeignKey('usuario.id'), nullable=False)
+    comentarios_post = database.relationship('Comentario', backref='comentarios_do_post', lazy=True)
+
+
+class Comentario(database.Model):
+    id = database.Column(database.Integer, primary_key=True)
+    texto_comentario = database.Column(database.Text, nullable=False)
+    data_criacao = database.Column(database.DateTime, nullable=False, default=datetime.utcnow)
+    id_usuario_comentario = database.Column(database.Integer, database.ForeignKey('usuario.id'), nullable=False)
+    id_post = database.Column(database.Integer, database.ForeignKey('post.id'), nullable=False)
